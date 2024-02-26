@@ -104,11 +104,11 @@ public class RobotContainer
 
     new JoystickButton(driverXbox, 1).onTrue((new InstantCommand(drivebase::zeroGyro)));
     new JoystickButton(driverXbox, 3).onTrue(new InstantCommand(drivebase::addFakeVisionReading));
-    new JoystickButton(driverXbox,
+    /*new JoystickButton(driverXbox,
                        2).whileTrue(
         Commands.deferredProxy(() -> drivebase.driveToPose(
                                    new Pose2d(new Translation2d(4, 4), Rotation2d.fromDegrees(0)))
-                              ));
+                              )); */
 //    new JoystickButton(driverXbox, 3).whileTrue(new RepeatCommand(new InstantCommand(drivebase::lock, drivebase)));
   }
 
@@ -117,11 +117,12 @@ public class RobotContainer
    *
    * @return the command to run in autonomous
    */
-  public Command getAutonomousCommand()
+  /* START OF GETAUTONOMOUSCOMMAND
+   public Command getAutonomousCommand()
   {
     // An example command will be run in autonomous
     return drivebase.getAutonomousCommand("New Auto");
-  }
+  } END OF GETAUTONOMOUSCOMMAND */
 
   public void setDriveMode()
   {

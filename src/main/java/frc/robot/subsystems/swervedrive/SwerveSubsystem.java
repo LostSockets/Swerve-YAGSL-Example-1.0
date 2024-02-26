@@ -60,12 +60,12 @@ public class SwerveSubsystem extends SubsystemBase
     // Angle conversion factor is 360 / (GEAR RATIO * ENCODER RESOLUTION)
     //  In this case the gear ratio is 12.8 motor revolutions per wheel rotation.
     //  The encoder resolution per motor revolution is 1 per motor revolution.
-    double angleConversionFactor = SwerveMath.calculateDegreesPerSteeringRotation(12.8);
+    double angleConversionFactor = SwerveMath.calculateDegreesPerSteeringRotation(21.429);
     // Motor conversion factor is (PI * WHEEL DIAMETER IN METERS) / (GEAR RATIO * ENCODER RESOLUTION).
     //  In this case the wheel diameter is 4 inches, which must be converted to meters to get meters/second.
     //  The gear ratio is 6.75 motor revolutions per wheel rotation.
     //  The encoder resolution per motor revolution is 1 per motor revolution.
-    double driveConversionFactor = SwerveMath.calculateMetersPerRotation(Units.inchesToMeters(4), 6.75);
+    double driveConversionFactor = SwerveMath.calculateMetersPerRotation(Units.inchesToMeters(3.96), 8.14);
     System.out.println("\"conversionFactor\": {");
     System.out.println("\t\"angle\": " + angleConversionFactor + ",");
     System.out.println("\t\"drive\": " + driveConversionFactor);
@@ -84,7 +84,7 @@ public class SwerveSubsystem extends SubsystemBase
     }
     swerveDrive.setHeadingCorrection(false); // Heading correction should only be used while controlling the robot via angle.
     swerveDrive.setCosineCompensator(!SwerveDriveTelemetry.isSimulation); // Disables cosine compensation for simulations since it causes discrepancies not seen in real life.
-    setupPathPlanner();
+    //setupPathPlanner();
   }
 
   /**
@@ -101,8 +101,8 @@ public class SwerveSubsystem extends SubsystemBase
   /**
    * Setup AutoBuilder for PathPlanner.
    */
+    /* START OF SETUPPATHPLANNER{
   public void setupPathPlanner()
-  {
     AutoBuilder.configureHolonomic(
         this::getPose, // Robot pose supplier
         this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
@@ -129,7 +129,7 @@ public class SwerveSubsystem extends SubsystemBase
         },
         this // Reference to this subsystem to set requirements
                                   );
-  }
+  } END OF STARTUPPATHPLANNER*/
 
   /**
    * Aim the robot at the target returned by PhotonVision.
@@ -137,6 +137,7 @@ public class SwerveSubsystem extends SubsystemBase
    * @param camera {@link PhotonCamera} to communicate with.
    * @return A {@link Command} which will run the alignment.
    */
+  /* START OF AIMATTARGET
   public Command aimAtTarget(PhotonCamera camera)
   {
     return run(() -> {
@@ -149,7 +150,7 @@ public class SwerveSubsystem extends SubsystemBase
                                                            .getYaw()))); // Not sure if this will work, more math may be required.
       }
     });
-  }
+  } END OF AIMATTARGET */
 
   /**
    * Get the path follower with events.
@@ -157,11 +158,12 @@ public class SwerveSubsystem extends SubsystemBase
    * @param pathName       PathPlanner path name.
    * @return {@link AutoBuilder#followPath(PathPlannerPath)} path command.
    */
+  /* START OF GETAUTONOMOUSCOMMAND
   public Command getAutonomousCommand(String pathName)
   {
     // Create a path following command using AutoBuilder. This will also trigger event markers.
     return new PathPlannerAuto(pathName);
-  }
+  } END OF GETAUTONOMOUSCOMMAND */
 
   /**
    * Use PathPlanner Path finding to go to a point on the field.
@@ -169,6 +171,7 @@ public class SwerveSubsystem extends SubsystemBase
    * @param pose Target {@link Pose2d} to go to.
    * @return PathFinding command
    */
+  /* START OF DRIVETOPOSE
   public Command driveToPose(Pose2d pose)
   {
 // Create the constraints to use while pathfinding
@@ -183,7 +186,7 @@ public class SwerveSubsystem extends SubsystemBase
         0.0, // Goal end velocity in meters/sec
         0.0 // Rotation delay distance in meters. This is how far the robot should travel before attempting to rotate.
                                      );
-  }
+  } END OF DRIVETOPOSE */
 
   /**
    * Command to drive the robot using translative values and heading as a setpoint.
