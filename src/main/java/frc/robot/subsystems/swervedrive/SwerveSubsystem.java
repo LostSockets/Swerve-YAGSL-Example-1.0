@@ -36,7 +36,6 @@ import swervelib.parser.SwerveDriveConfiguration;
 import swervelib.parser.SwerveParser;
 import swervelib.telemetry.SwerveDriveTelemetry;
 import swervelib.telemetry.SwerveDriveTelemetry.TelemetryVerbosity;
-//import edu.wpi.first.wpilibj.Filesystem;
 
 public class SwerveSubsystem extends SubsystemBase
 {
@@ -48,7 +47,8 @@ public class SwerveSubsystem extends SubsystemBase
   /**
    * Maximum speed of the robot in meters per second, used to limit acceleration.
    */
-  public        double      maximumSpeed = Units.feetToMeters(14.5); 
+  public        double      maximumSpeed = Units.feetToMeters(0.1);  //default 14.5
+
 
   /**
    * Initialize {@link SwerveDrive} with the directory provided.
@@ -78,7 +78,7 @@ public class SwerveSubsystem extends SubsystemBase
     }
     swerveDrive.setHeadingCorrection(false); // Heading correction should only be used while controlling the robot via angle.
     swerveDrive.setCosineCompensator(!SwerveDriveTelemetry.isSimulation); // Disables cosine compensation for simulations since it causes discrepancies not seen in real life.
-    //setupPathPlanner();
+    setupPathPlanner();
   }
 
   /**
@@ -95,8 +95,9 @@ public class SwerveSubsystem extends SubsystemBase
   /**
    * Setup AutoBuilder for PathPlanner.
    */
-    /* START OF SETUPPATHPLANNER{
+  
   public void setupPathPlanner()
+  {
     AutoBuilder.configureHolonomic(
         this::getPose, // Robot pose supplier
         this::resetOdometry, // Method to reset odometry (will be called if your auto has a starting pose)
@@ -123,7 +124,7 @@ public class SwerveSubsystem extends SubsystemBase
         },
         this // Reference to this subsystem to set requirements
                                   );
-  } END OF STARTUPPATHPLANNER*/
+  }
 
   /**
    * Aim the robot at the target returned by PhotonVision.
@@ -131,7 +132,7 @@ public class SwerveSubsystem extends SubsystemBase
    * @param camera {@link PhotonCamera} to communicate with.
    * @return A {@link Command} which will run the alignment.
    */
-  /* START OF AIMATTARGET
+  
   public Command aimAtTarget(PhotonCamera camera)
   {
     return run(() -> {
@@ -144,7 +145,7 @@ public class SwerveSubsystem extends SubsystemBase
                                                            .getYaw()))); // Not sure if this will work, more math may be required.
       }
     });
-  } END OF AIMATTARGET */
+  }
 
   /**
    * Get the path follower with events.
@@ -152,12 +153,12 @@ public class SwerveSubsystem extends SubsystemBase
    * @param pathName       PathPlanner path name.
    * @return {@link AutoBuilder#followPath(PathPlannerPath)} path command.
    */
-  /* START OF GETAUTONOMOUSCOMMAND
+  
   public Command getAutonomousCommand(String pathName)
   {
     // Create a path following command using AutoBuilder. This will also trigger event markers.
     return new PathPlannerAuto(pathName);
-  } END OF GETAUTONOMOUSCOMMAND */
+  } 
 
   /**
    * Use PathPlanner Path finding to go to a point on the field.
@@ -165,12 +166,13 @@ public class SwerveSubsystem extends SubsystemBase
    * @param pose Target {@link Pose2d} to go to.
    * @return PathFinding command
    */
-  /* START OF DRIVETOPOSE
+
   public Command driveToPose(Pose2d pose)
   {
 // Create the constraints to use while pathfinding
     PathConstraints constraints = new PathConstraints(
-        swerveDrive.getMaximumVelocity(), 4.0,
+        //swerveDrive.getMaximumVelocity(), 4.0,
+        maximumSpeed, 4.0,
         swerveDrive.getMaximumAngularVelocity(), Units.degreesToRadians(720));
 
 // Since AutoBuilder is configured, we can use it to build pathfinding commands
@@ -180,7 +182,7 @@ public class SwerveSubsystem extends SubsystemBase
         0.0, // Goal end velocity in meters/sec
         0.0 // Rotation delay distance in meters. This is how far the robot should travel before attempting to rotate.
                                      );
-  } END OF DRIVETOPOSE */
+  }
 
   /**
    * Command to drive the robot using translative values and heading as a setpoint.
