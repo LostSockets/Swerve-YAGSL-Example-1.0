@@ -67,9 +67,9 @@ public class RobotContainer
     // left stick controls translation
     // right stick controls the desired angle NOT angular rotation
     Command driveFieldOrientedDirectAngle = drivebase.driveCommand(
-        () -> MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
-        () -> MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
-        () -> driverXbox.getRawAxis(4));
+        () -> MathUtil.applyDeadband(driverXbox.getLeftY()*0.8, OperatorConstants.LEFT_Y_DEADBAND),
+        () -> MathUtil.applyDeadband(driverXbox.getLeftX()*0.8, OperatorConstants.LEFT_X_DEADBAND),
+        () -> driverXbox.getRawAxis(4)*0.8);
         /*() -> driverXbox.getRightX(),
         () -> driverXbox.getRightY()); */
 
@@ -78,6 +78,7 @@ public class RobotContainer
     // controls are front-left positive
     // left stick controls translation
     // right stick controls the angular velocity of the robot
+    //test = MathUtil.applyDeadband((driverXbox.getLeftY()), OperatorConstants.LEFT_Y_DEADBAND);
     Command driveFieldOrientedAnglularVelocity = drivebase.driveCommand(
         () -> MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
         () -> MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
