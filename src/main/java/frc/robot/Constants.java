@@ -38,28 +38,34 @@ public final class Constants
     // Hold time on motor brakes when disabled
     public static final double WHEEL_LOCK_TIME = 10; // seconds
     public static final double DRIVE_THROTTLE = 0.8;
+    public static final double DRIVE_TURBO = 1.0;
+    public static final int ARCADE_DRIVE_TURBO = 6;
+    public static final int JOYSTICK_DRIVER = 0;
   }
 
   public static class OperatorConstants
   {
 
     // Joystick Deadband
+    public static final int JOYSTICK_OPERATOR = 1;
     public static final double LEFT_X_DEADBAND  = 0.1;
     public static final double LEFT_Y_DEADBAND  = 0.1;
     public static final double RIGHT_X_DEADBAND = 0.1;
     public static final double TURN_CONSTANT    = 6;
-    public static final int INTAKE_MOTOR_PORT = 20;
+    public static final int INTAKE_MOTOR_PORT = 12;
     public static final int INDEXER_MOTOR_PORT = 11;
     public static final int SHOOTER_MOTOR_PORT = 10;
+    public static final int ELEVATOR_MOTOR1_PORT = 20;
+    public static final int ELEVATOR_MOTOR2_PORT = 21;
     public static final int CLIMBER_MOTOR_PORT = 30;
-    public static final int INTAKE_AXIS = 1;
-    public static final int INTAKE_IN = 1;
-    public static final int INTAKE_OUT = 2;
+    public static final int INTAKE_AXIS = 1; //if using joystick
+    public static final int INTAKE_IN = 1; // if using button
+    public static final int INTAKE_OUT = 2; // if using button
     public static final int SHOOTER = 3;
     public static final int CLIMBER_UP = 5;
     public static final int CLIMBER_DOWN = 6;
-    public static final int INDEXER_UP = 7;
-    public static final int INDEXER_DOWN = 8;
+    public static final int INDEXER_FORWARD = 7;
+    public static final int INDEXER_REVERSE = 8;
 
   }
 }

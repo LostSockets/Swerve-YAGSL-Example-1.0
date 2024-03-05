@@ -48,9 +48,9 @@ public class RobotContainer
   private final IndexerSubsystem indexerSubsystem = new IndexerSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
-  private final XboxController operatorXbox = new XboxController(1);
-  private final XboxController driverXbox = new XboxController(0);
-  /**
+  private final XboxController operatorXbox = new XboxController(OperatorConstants.JOYSTICK_OPERATOR);
+  private final XboxController driverXbox = new XboxController(DrivebaseConstants.JOYSTICK_DRIVER);
+  /** 
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer()
@@ -76,10 +76,19 @@ public class RobotContainer
     // controls are front-left positive
     // left stick controls translation
     // right stick controls the desired angle NOT angular rotation
+
+    final double speedMultiplier;
+
+    if (driverXbox.getRawButton(DrivebaseConstants.ARCADE_DRIVE_TURBO)){
+      speedMultiplier = DrivebaseConstants.DRIVE_TURBO;
+    } else {
+      speedMultiplier = DrivebaseConstants.DRIVE_THROTTLE;
+    }
+
     Command driveFieldOrientedDirectAngle = drivebase.driveCommand(
-        () -> MathUtil.applyDeadband(driverXbox.getLeftY()*DrivebaseConstants.DRIVE_THROTTLE, OperatorConstants.LEFT_Y_DEADBAND),
-        () -> MathUtil.applyDeadband(driverXbox.getLeftX()*DrivebaseConstants.DRIVE_THROTTLE, OperatorConstants.LEFT_X_DEADBAND),
-        () -> driverXbox.getRawAxis(4)*DrivebaseConstants.DRIVE_THROTTLE);
+        () -> MathUtil.applyDeadband(driverXbox.getLeftY()*speedMultiplier, OperatorConstants.LEFT_Y_DEADBAND),
+        () -> MathUtil.applyDeadband(driverXbox.getLeftX()*speedMultiplier, OperatorConstants.LEFT_X_DEADBAND),
+        () -> driverXbox.getRawAxis(4)*speedMultiplier);
         /*() -> driverXbox.getRightX(),
         () -> driverXbox.getRightY()); */
 
@@ -132,8 +141,8 @@ public class RobotContainer
     new JoystickButton(operatorXbox, OperatorConstants.SHOOTER).onTrue(new ShooterCmd(shooterSubsystem, 1)); //intake
     new JoystickButton(operatorXbox, OperatorConstants.CLIMBER_UP).onTrue(new ClimberCmd(climberSubsystem, 1)); //intake
     new JoystickButton(operatorXbox, OperatorConstants.CLIMBER_DOWN).onTrue(new ClimberCmd(climberSubsystem, -1)); // reverse intake
-    new JoystickButton(operatorXbox, OperatorConstants.INDEXER_UP).onTrue(new IndexerCmd(indexerSubsystem, 1)); //intake
-    new JoystickButton(operatorXbox, OperatorConstants.INDEXER_DOWN).onTrue(new IndexerCmd(indexerSubsystem, -1)); // reverse intake
+    new JoystickButton(operatorXbox, OperatorConstants.INDEXER_FORWARD).onTrue(new IndexerCmd(indexerSubsystem, 1)); //intake
+    new JoystickButton(operatorXbox, OperatorConstants.INDEXER_REVERSE).onTrue(new IndexerCmd(indexerSubsystem, -1)); // reverse intake
 
   }
 
