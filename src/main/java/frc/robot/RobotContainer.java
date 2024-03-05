@@ -20,8 +20,12 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.DrivebaseConstants;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.commands.operator.ClimberCmd;
+import frc.robot.commands.operator.IndexerCmd;
 import frc.robot.commands.operator.IntakeCmd;
 import frc.robot.commands.operator.ShooterCmd;
+import frc.robot.subsystems.operator.ClimberSubsystem;
+import frc.robot.subsystems.operator.IndexerSubsystem;
 import frc.robot.subsystems.operator.IntakeSubsystem;
 import frc.robot.subsystems.operator.ShooterSubsystem;
 //import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
@@ -41,7 +45,9 @@ public class RobotContainer
                                                                          "swerve/neo"));
 
   private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  private final IndexerSubsystem indexerSubsystem = new IndexerSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
   private final XboxController operatorXbox = new XboxController(1);
   private final XboxController driverXbox = new XboxController(0);
   /**
@@ -124,6 +130,10 @@ public class RobotContainer
     new JoystickButton(operatorXbox, OperatorConstants.INTAKE_IN).onTrue(new IntakeCmd(intakeSubsystem, 1)); //intake
     new JoystickButton(operatorXbox, OperatorConstants.INTAKE_OUT).onTrue(new IntakeCmd(intakeSubsystem, -1)); // reverse intake
     new JoystickButton(operatorXbox, OperatorConstants.SHOOTER).onTrue(new ShooterCmd(shooterSubsystem, 1)); //intake
+    new JoystickButton(operatorXbox, OperatorConstants.CLIMBER_UP).onTrue(new ClimberCmd(climberSubsystem, 1)); //intake
+    new JoystickButton(operatorXbox, OperatorConstants.CLIMBER_DOWN).onTrue(new ClimberCmd(climberSubsystem, -1)); // reverse intake
+    new JoystickButton(operatorXbox, OperatorConstants.INDEXER_UP).onTrue(new IndexerCmd(indexerSubsystem, 1)); //intake
+    new JoystickButton(operatorXbox, OperatorConstants.INDEXER_DOWN).onTrue(new IndexerCmd(indexerSubsystem, -1)); // reverse intake
 
   }
 

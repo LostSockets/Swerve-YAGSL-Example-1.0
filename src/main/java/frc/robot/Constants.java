@@ -49,10 +49,17 @@ public final class Constants
     public static final double RIGHT_X_DEADBAND = 0.1;
     public static final double TURN_CONSTANT    = 6;
     public static final int INTAKE_MOTOR_PORT = 20;
-    public static final int SHOOTER_MOTOR_PORT = 21;
+    public static final int INDEXER_MOTOR_PORT = 11;
+    public static final int SHOOTER_MOTOR_PORT = 10;
+    public static final int CLIMBER_MOTOR_PORT = 30;
     public static final int INTAKE_AXIS = 1;
     public static final int INTAKE_IN = 1;
     public static final int INTAKE_OUT = 2;
     public static final int SHOOTER = 3;
+    public static final int CLIMBER_UP = 5;
+    public static final int CLIMBER_DOWN = 6;
+    public static final int INDEXER_UP = 7;
+    public static final int INDEXER_DOWN = 8;
+
   }
 }
