@@ -5,21 +5,26 @@
 package frc.robot;
 
 import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.math.geometry.Pose2d;
-import edu.wpi.first.math.geometry.Rotation2d;
-import edu.wpi.first.math.geometry.Translation2d;
+//import edu.wpi.first.math.geometry.Pose2d;
+//import edu.wpi.first.math.geometry.Rotation2d;
+//import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
+//import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
+//import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
+import frc.robot.Constants.DrivebaseConstants;
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
+import frc.robot.commands.operator.IntakeCmd;
+import frc.robot.commands.operator.ShooterCmd;
+import frc.robot.subsystems.operator.IntakeSubsystem;
+import frc.robot.subsystems.operator.ShooterSubsystem;
+//import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
 
@@ -34,13 +39,11 @@ public class RobotContainer
   // The robot's subsystems and commands are defined here...
   private final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
                                                                          "swerve/neo"));
-  // CommandJoystick rotationController = new CommandJoystick(1);
-  // Replace with CommandPS4Controller or CommandJoystick if needed
-  CommandJoystick driverController = new CommandJoystick(1);
 
-  // CommandJoystick driverController   = new CommandJoystick(3);//(OperatorConstants.DRIVER_CONTROLLER_PORT);
-  XboxController driverXbox = new XboxController(0);
-
+  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  private final XboxController operatorXbox = new XboxController(1);
+  private final XboxController driverXbox = new XboxController(0);
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
@@ -49,7 +52,8 @@ public class RobotContainer
     // Configure the trigger bindings
     configureBindings();
 
-    AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
+    // COMMENTED BELOW OUT!!!
+    /*AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
                                                                    () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
                                                                                                 OperatorConstants.LEFT_Y_DEADBAND),
                                                                    () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
@@ -60,16 +64,16 @@ public class RobotContainer
                                                                    driverXbox::getAButtonPressed,
                                                                    driverXbox::getXButtonPressed,
                                                                    driverXbox::getBButtonPressed);
-
+    */
     // Applies deadbands and inverts controls because joysticks
     // are back-right positive while robot
     // controls are front-left positive
     // left stick controls translation
     // right stick controls the desired angle NOT angular rotation
     Command driveFieldOrientedDirectAngle = drivebase.driveCommand(
-        () -> MathUtil.applyDeadband(driverXbox.getLeftY()*0.8, OperatorConstants.LEFT_Y_DEADBAND),
-        () -> MathUtil.applyDeadband(driverXbox.getLeftX()*0.8, OperatorConstants.LEFT_X_DEADBAND),
-        () -> driverXbox.getRawAxis(4)*0.8);
+        () -> MathUtil.applyDeadband(driverXbox.getLeftY()*DrivebaseConstants.DRIVE_THROTTLE, OperatorConstants.LEFT_Y_DEADBAND),
+        () -> MathUtil.applyDeadband(driverXbox.getLeftX()*DrivebaseConstants.DRIVE_THROTTLE, OperatorConstants.LEFT_X_DEADBAND),
+        () -> driverXbox.getRawAxis(4)*DrivebaseConstants.DRIVE_THROTTLE);
         /*() -> driverXbox.getRightX(),
         () -> driverXbox.getRightY()); */
 
@@ -79,10 +83,13 @@ public class RobotContainer
     // left stick controls translation
     // right stick controls the angular velocity of the robot
     //test = MathUtil.applyDeadband((driverXbox.getLeftY()), OperatorConstants.LEFT_Y_DEADBAND);
-    Command driveFieldOrientedAnglularVelocity = drivebase.driveCommand(
+
+    // COMMENTED BELOW OUT!!!!
+    /*Command driveFieldOrientedAnglularVelocity = drivebase.driveCommand(
         () -> MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
         () -> MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
         () -> driverXbox.getRawAxis(2));
+    */
 
     Command driveFieldOrientedDirectAngleSim = drivebase.simDriveCommand(
         () -> MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
@@ -112,6 +119,12 @@ public class RobotContainer
                                    new Pose2d(new Translation2d(4, 4), Rotation2d.fromDegrees(0)))
                               )); */
 //    new JoystickButton(driverXbox, 3).whileTrue(new RepeatCommand(new InstantCommand(drivebase::lock, drivebase)));
+
+    //intakeSubsystem.setDefaultCommand(new IntakeCmd(intakeSubsystem, () -> -operatorXbox.getRawAxis(Constants.OperatorConstants.INTAKE_AXIS)));
+    new JoystickButton(operatorXbox, OperatorConstants.INTAKE_IN).onTrue(new IntakeCmd(intakeSubsystem, 1)); //intake
+    new JoystickButton(operatorXbox, OperatorConstants.INTAKE_OUT).onTrue(new IntakeCmd(intakeSubsystem, -1)); // reverse intake
+    new JoystickButton(operatorXbox, OperatorConstants.SHOOTER).onTrue(new ShooterCmd(shooterSubsystem, 1)); //intake
+
   }
 
   /**

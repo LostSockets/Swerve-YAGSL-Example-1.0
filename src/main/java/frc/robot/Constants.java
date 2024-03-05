@@ -37,6 +37,7 @@ public final class Constants
 
     // Hold time on motor brakes when disabled
     public static final double WHEEL_LOCK_TIME = 10; // seconds
+    public static final double DRIVE_THROTTLE = 0.8;
   }
 
   public static class OperatorConstants
@@ -47,5 +48,11 @@ public final class Constants
     public static final double LEFT_Y_DEADBAND  = 0.1;
     public static final double RIGHT_X_DEADBAND = 0.1;
     public static final double TURN_CONSTANT    = 6;
+    public static final int INTAKE_MOTOR_PORT = 20;
+    public static final int SHOOTER_MOTOR_PORT = 21;
+    public static final int INTAKE_AXIS = 1;
+    public static final int INTAKE_IN = 1;
+    public static final int INTAKE_OUT = 2;
+    public static final int SHOOTER = 3;
   }
 }
