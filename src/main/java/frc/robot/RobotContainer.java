@@ -12,19 +12,25 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.Commands;
 //import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import edu.wpi.first.wpilibj2.command.WaitCommand;
 //import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.DrivebaseConstants;
 import frc.robot.Constants.OperatorConstants;
+import frc.robot.Constants.OperatorPIDConstants;
 import frc.robot.commands.operator.ClimberCmd;
+import frc.robot.commands.operator.ElevatorCmd;
+import frc.robot.commands.operator.ElevatorPIDCmd;
 import frc.robot.commands.operator.IndexerCmd;
 import frc.robot.commands.operator.IntakeCmd;
 import frc.robot.commands.operator.ShooterCmd;
 import frc.robot.subsystems.operator.ClimberSubsystem;
+import frc.robot.subsystems.operator.ElevatorSubsystem;
 import frc.robot.subsystems.operator.IndexerSubsystem;
 import frc.robot.subsystems.operator.IntakeSubsystem;
 import frc.robot.subsystems.operator.ShooterSubsystem;
@@ -48,6 +54,7 @@ public class RobotContainer
   private final IndexerSubsystem indexerSubsystem = new IndexerSubsystem();
   private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
   private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
+  private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final XboxController operatorXbox = new XboxController(OperatorConstants.JOYSTICK_OPERATOR);
   private final XboxController driverXbox = new XboxController(DrivebaseConstants.JOYSTICK_DRIVER);
   /** 
@@ -77,18 +84,20 @@ public class RobotContainer
     // left stick controls translation
     // right stick controls the desired angle NOT angular rotation
 
-    final double speedMultiplier;
+    //final double speedMultiplier;
 
+    /*    UNCOMMENT THIS AND ADD *speedMultiplier TO driverXbox.getLeftY() IN Command driveFieldOrientedDirectAngle BELOW
     if (driverXbox.getRawButton(DrivebaseConstants.ARCADE_DRIVE_TURBO)){
       speedMultiplier = DrivebaseConstants.DRIVE_TURBO;
     } else {
       speedMultiplier = DrivebaseConstants.DRIVE_THROTTLE;
     }
+    */
 
     Command driveFieldOrientedDirectAngle = drivebase.driveCommand(
-        () -> MathUtil.applyDeadband(driverXbox.getLeftY()*speedMultiplier, OperatorConstants.LEFT_Y_DEADBAND),
-        () -> MathUtil.applyDeadband(driverXbox.getLeftX()*speedMultiplier, OperatorConstants.LEFT_X_DEADBAND),
-        () -> driverXbox.getRawAxis(4)*speedMultiplier);
+        () -> MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
+        () -> MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
+        () -> driverXbox.getRawAxis(4));
         /*() -> driverXbox.getRightX(),
         () -> driverXbox.getRightY()); */
 
@@ -126,8 +135,8 @@ public class RobotContainer
   {
     // Schedule `ExampleCommand` when `exampleCondition` changes to `true`
 
-    new JoystickButton(driverXbox, 1).onTrue((new InstantCommand(drivebase::zeroGyro)));
-    new JoystickButton(driverXbox, 3).onTrue(new InstantCommand(drivebase::addFakeVisionReading));
+    //new JoystickButton(driverXbox, 1).onTrue((new InstantCommand(drivebase::zeroGyro)));
+    //new JoystickButton(driverXbox, 3).onTrue(new InstantCommand(drivebase::addFakeVisionReading));
     /*new JoystickButton(driverXbox,
                        2).whileTrue(
         Commands.deferredProxy(() -> drivebase.driveToPose(
@@ -138,12 +147,14 @@ public class RobotContainer
     //intakeSubsystem.setDefaultCommand(new IntakeCmd(intakeSubsystem, () -> -operatorXbox.getRawAxis(Constants.OperatorConstants.INTAKE_AXIS)));
     new JoystickButton(operatorXbox, OperatorConstants.INTAKE_IN).onTrue(new IntakeCmd(intakeSubsystem, 1)); //intake
     new JoystickButton(operatorXbox, OperatorConstants.INTAKE_OUT).onTrue(new IntakeCmd(intakeSubsystem, -1)); // reverse intake
-    new JoystickButton(operatorXbox, OperatorConstants.SHOOTER).onTrue(new ShooterCmd(shooterSubsystem, 1)); //intake
-    new JoystickButton(operatorXbox, OperatorConstants.CLIMBER_UP).onTrue(new ClimberCmd(climberSubsystem, 1)); //intake
-    new JoystickButton(operatorXbox, OperatorConstants.CLIMBER_DOWN).onTrue(new ClimberCmd(climberSubsystem, -1)); // reverse intake
+    //new JoystickButton(operatorXbox, OperatorConstants.SHOOTER).whileTrue(new ShooterCmd(shooterSubsystem, 1)); //intake
+    new JoystickButton(operatorXbox, OperatorConstants.SHOOTER).whileTrue(Commands.parallel(new IndexerCmd(indexerSubsystem, 1), (new WaitCommand(1.0).andThen(new ShooterCmd(shooterSubsystem, 1))))); //intake
+    //new JoystickButton(operatorXbox, OperatorConstants.CLIMBER_UP).onTrue(new ClimberCmd(climberSubsystem, 1)); //intake
+    //new JoystickButton(operatorXbox, OperatorConstants.CLIMBER_DOWN).onTrue(new ClimberCmd(climberSubsystem, -1)); // reverse intake
     new JoystickButton(operatorXbox, OperatorConstants.INDEXER_FORWARD).onTrue(new IndexerCmd(indexerSubsystem, 1)); //intake
     new JoystickButton(operatorXbox, OperatorConstants.INDEXER_REVERSE).onTrue(new IndexerCmd(indexerSubsystem, -1)); // reverse intake
-
+    new JoystickButton(operatorXbox, OperatorConstants.ELEVATOR_HIGH).onTrue(new ElevatorPIDCmd(elevatorSubsystem, OperatorPIDConstants.ELEVATOR_MAX_HEIGHT));
+    new JoystickButton(operatorXbox, OperatorConstants.ELEVATOR_LOW).onTrue(new ElevatorPIDCmd(elevatorSubsystem, OperatorPIDConstants.ELEVATOR_MIN_HEIGHT));
   }
 
   /**
@@ -151,12 +162,12 @@ public class RobotContainer
    *
    * @return the command to run in autonomous
    */
-  /* START OF GETAUTONOMOUSCOMMAND
+  // START OF GETAUTONOMOUSCOMMAND
    public Command getAutonomousCommand()
   {
     // An example command will be run in autonomous
     return drivebase.getAutonomousCommand("New Auto");
-  } END OF GETAUTONOMOUSCOMMAND */
+  }
 
   public void setDriveMode()
   {

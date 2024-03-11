@@ -36,11 +36,12 @@ public final class Constants
   {
 
     // Hold time on motor brakes when disabled
+    public static final int JOYSTICK_DRIVER = 0;
     public static final double WHEEL_LOCK_TIME = 10; // seconds
     public static final double DRIVE_THROTTLE = 0.8;
     public static final double DRIVE_TURBO = 1.0;
     public static final int ARCADE_DRIVE_TURBO = 6;
-    public static final int JOYSTICK_DRIVER = 0;
+    public static final double MAX_SPEED = 14.5;
   }
 
   public static class OperatorConstants
@@ -58,14 +59,24 @@ public final class Constants
     public static final int ELEVATOR_MOTOR1_PORT = 20;
     public static final int ELEVATOR_MOTOR2_PORT = 21;
     public static final int CLIMBER_MOTOR_PORT = 30;
-    public static final int INTAKE_AXIS = 1; //if using joystick
-    public static final int INTAKE_IN = 1; // if using button
-    public static final int INTAKE_OUT = 2; // if using button
-    public static final int SHOOTER = 3;
-    public static final int CLIMBER_UP = 5;
-    public static final int CLIMBER_DOWN = 6;
-    public static final int INDEXER_FORWARD = 7;
-    public static final int INDEXER_REVERSE = 8;
+    public static final int INTAKE_IN = 2; // left trigger
+    public static final int INTAKE_OUT = 3; // right trigger
+    public static final int SHOOTER = 2;
+    public static final int ELEVATOR_AXIS = 1;
+    public static final int ELEVATOR_HIGH = 3;  //PID!!!
+    public static final int ELEVATOR_LOW = 4;  //PID!!!
+    public static final int CLIMBER_AXIS = 5;
+    public static final int INDEXER_FORWARD = 5;
+    public static final int INDEXER_REVERSE = 6;
 
+  }
+
+  public static class OperatorPIDConstants
+  {
+    public static final double ELEVATOR_P = 0.01;  // NEED TO TEST THESE!!!
+    public static final double ELEVATOR_I = 0;
+    public static final double ELEVATOR_D = 0;
+    public static final double ELEVATOR_MAX_HEIGHT = 20;
+    public static final double ELEVATOR_MIN_HEIGHT = 0;
   }
 }
