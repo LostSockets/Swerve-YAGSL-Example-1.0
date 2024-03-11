@@ -11,7 +11,8 @@ import frc.robot.Constants;
 
 public class ClimberSubsystem extends SubsystemBase{
 
-    private final CANSparkMax climberMotor = new CANSparkMax(Constants.OperatorConstants.CLIMBER_MOTOR_PORT, MotorType.kBrushless);
+    private final CANSparkMax climberMotor1 = new CANSparkMax(Constants.OperatorConstants.CLIMBER_MOTOR_PORT1, MotorType.kBrushless);
+    private final CANSparkMax climberMotor2 = new CANSparkMax(Constants.OperatorConstants.CLIMBER_MOTOR_PORT1, MotorType.kBrushless);
     
     public ClimberSubsystem(){
 
@@ -23,7 +24,9 @@ public class ClimberSubsystem extends SubsystemBase{
 
     public void setMotor(double speed) {
         //SmartDashboard.putNumber("pivot speed", speed);
-        climberMotor.set(speed);
+        climberMotor1.set(speed);
+        climberMotor2.set(speed);
+
     }
    
 
