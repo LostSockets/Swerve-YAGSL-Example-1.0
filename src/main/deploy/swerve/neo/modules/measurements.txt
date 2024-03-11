@@ -1,0 +1,8 @@
+total length: 72.39
+half length: 36.195
+
+total width: 50.8
+half width: 25.4
+
+distance forward from centre of navx: 33.02
+distance backward from centre of navx: 39.37

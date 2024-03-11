@@ -42,6 +42,10 @@ public final class Constants
     public static final double DRIVE_TURBO = 1.0;
     public static final int ARCADE_DRIVE_TURBO = 6;
     public static final double MAX_SPEED = 14.5;  // default 14.5
+
+    public static final double WHEEL_BASE_LENGTH = 27.5; // in inches
+    public static final double WHEEL_BASE_WIDTH = 20.25; // in inches
+
   }
 
   public static class OperatorConstants
@@ -58,8 +62,8 @@ public final class Constants
     public static final int SHOOTER_MOTOR_PORT = 10;
     public static final int ELEVATOR_MOTOR1_PORT = 20;
     public static final int ELEVATOR_MOTOR2_PORT = 21;
-    public static final int CLIMBER_MOTOR_PORT1 = 30;
-    public static final int CLIMBER_MOTOR_PORT2 = 31;
+    public static final int CLIMBER_MOTOR_PORT1 = 25;
+    public static final int CLIMBER_MOTOR_PORT2 = 26;
     public static final int INTAKE_IN = 2; // left trigger
     public static final int INTAKE_OUT = 3; // right trigger
     public static final int SHOOTER = 2;
