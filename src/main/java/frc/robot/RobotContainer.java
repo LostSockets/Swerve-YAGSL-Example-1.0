@@ -29,7 +29,7 @@ import frc.robot.commands.operator.ElevatorPIDCmd;
 import frc.robot.commands.operator.IndexerCmd;
 import frc.robot.commands.operator.IntakeCmd;
 import frc.robot.commands.operator.ShooterCmd;
-import frc.robot.subsystems.operator.ClimberSubsystem;
+//import frc.robot.subsystems.operator.ClimberSubsystem;
 import frc.robot.subsystems.operator.ElevatorSubsystem;
 import frc.robot.subsystems.operator.IndexerSubsystem;
 import frc.robot.subsystems.operator.IntakeSubsystem;
