@@ -15,8 +15,8 @@ import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
 //import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
-//import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
-//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj2.command.RepeatCommand;
@@ -47,8 +47,10 @@ import java.io.File;
 //import java.io.IOException;
 //import java.nio.file.Path;
 
-//import com.pathplanner.lib.auto.AutoBuilder;
-//import com.pathplanner.lib.auto.NamedCommands;
+
+//IF USING CHOOSER
+import com.pathplanner.lib.auto.AutoBuilder;
+import com.pathplanner.lib.auto.NamedCommands;
 //import com.pathplanner.lib.commands.PathPlannerAuto;
 
 /**
@@ -70,11 +72,13 @@ public class RobotContainer
   //private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final XboxController operatorXbox = new XboxController(OperatorConstants.JOYSTICK_OPERATOR);
   private final XboxController driverXbox = new XboxController(DrivebaseConstants.JOYSTICK_DRIVER);
+ 
+ 
   /** 
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
 
-  //SendableChooser<Command> autoChooser;
+  private final SendableChooser<Command> autoChooser;
 
   public RobotContainer()
   {
@@ -82,14 +86,15 @@ public class RobotContainer
     configureBindings();
 
     
-    //autoChooser = AutoBuilder.buildAutoChooser();
+    autoChooser = AutoBuilder.buildAutoChooser();
 
-
-    /*chooser.addOption("Blue Auto 1", getAutonomousCommand());
-    chooser.addOption("Blue Auto 3", getAutonomousCommand());
-    chooser.addOption("Spinny", getAutonomousCommand());
-
-    Shuffleboard.getTab("Autonomous").add(chooser); */
+    /*
+    autoChooser.addOption("BlueAuto1", getAutonomousCommand());
+    autoChooser.addOption("Spinny", getAutonomousCommand());
+    autoChooser.addOption("Blue1andSpinny", getAutonomousCommand());
+    */
+    
+    SmartDashboard.putData("Auto Mode", autoChooser);
 
     // COMMENTED BELOW OUT!!!
     /*AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
@@ -211,7 +216,8 @@ public class RobotContainer
     // An example command will be run in autonomous
     return drivebase.getAutonomousCommand("Blue1Auto");
     //return drivebase.getAutonomousCommand("Blue1andSpinny");
-    //return new PathPlannerAuto("example");
+
+    // IF USING CHOOSER:
     //return autoChooser.getSelected();
   }
 
