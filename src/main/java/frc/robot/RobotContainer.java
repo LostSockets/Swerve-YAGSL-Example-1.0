@@ -31,6 +31,7 @@ import frc.robot.Constants.DriverConstants;
 import frc.robot.Constants.OperatorConstants;
 //import frc.robot.Constants.OperatorPIDConstants;
 import frc.robot.commands.operator.ClimberCmd;
+import frc.robot.commands.swervedrive.drivebase.AbsoluteFieldDrive;
 //import frc.robot.commands.operator.ElevatorCmd;
 //import frc.robot.commands.operator.ElevatorPIDCmd;
 //import frc.robot.commands.operator.IndexerCmd;
@@ -41,7 +42,7 @@ import frc.robot.subsystems.operator.ClimberSubsystem;
 //import frc.robot.subsystems.operator.IndexerSubsystem;
 //import frc.robot.subsystems.operator.IntakeSubsystem;
 //import frc.robot.subsystems.operator.ShooterSubsystem;
-//import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
+import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
 //import java.io.IOException;
@@ -82,22 +83,20 @@ public class RobotContainer
 
   public RobotContainer()
   {
+    
     // Configure the trigger bindings
     configureBindings();
 
-    
-    autoChooser = AutoBuilder.buildAutoChooser();
-
+  
     /*
     autoChooser.addOption("BlueAuto1", getAutonomousCommand());
     autoChooser.addOption("Spinny", getAutonomousCommand());
     autoChooser.addOption("Blue1andSpinny", getAutonomousCommand());
     */
     
-    SmartDashboard.putData("Auto Mode", autoChooser);
 
     // COMMENTED BELOW OUT!!!
-    /*AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
+    AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
                                                                    () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
                                                                                                 OperatorConstants.LEFT_Y_DEADBAND),
                                                                    () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
@@ -108,7 +107,7 @@ public class RobotContainer
                                                                    driverXbox::getAButtonPressed,
                                                                    driverXbox::getXButtonPressed,
                                                                    driverXbox::getBButtonPressed);
-    */
+    
     // Applies deadbands and inverts controls because joysticks
     // are back-right positive while robot
     // controls are front-left positive
@@ -140,11 +139,11 @@ public class RobotContainer
     //test = MathUtil.applyDeadband((driverXbox.getLeftY()), OperatorConstants.LEFT_Y_DEADBAND);
 
     // COMMENTED BELOW OUT!!!!
-    /*Command driveFieldOrientedAnglularVelocity = drivebase.driveCommand(
+    Command driveFieldOrientedAnglularVelocity = drivebase.driveCommand(
         () -> MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
         () -> MathUtil.applyDeadband(driverXbox.getLeftX(), OperatorConstants.LEFT_X_DEADBAND),
         () -> driverXbox.getRawAxis(2));
-    */
+    
 
     Command driveFieldOrientedDirectAngleSim = drivebase.simDriveCommand(
         () -> MathUtil.applyDeadband(driverXbox.getLeftY(), OperatorConstants.LEFT_Y_DEADBAND),
@@ -154,8 +153,8 @@ public class RobotContainer
     drivebase.setDefaultCommand(
         !RobotBase.isSimulation() ? driveFieldOrientedDirectAngle : driveFieldOrientedDirectAngleSim);
 
-    //SmartDashboard.putData("Auto Chooser", autoChooser);
-
+    autoChooser = AutoBuilder.buildAutoChooser();
+    SmartDashboard.putData("Auto Mode", autoChooser);
     }
 
   /*
@@ -214,11 +213,11 @@ public class RobotContainer
    public Command getAutonomousCommand()
   {
     // An example command will be run in autonomous
-    return drivebase.getAutonomousCommand("Blue1Auto");
+    //return drivebase.getAutonomousCommand("Blue1Auto");
     //return drivebase.getAutonomousCommand("Blue1andSpinny");
 
     // IF USING CHOOSER:
-    //return autoChooser.getSelected();
+    return autoChooser.getSelected();
   }
 
   public void setDriveMode()
@@ -230,4 +229,5 @@ public class RobotContainer
   {
     drivebase.setMotorBrake(brake);
   }
+
 }

@@ -81,7 +81,7 @@ public final class Constants
     public static final int CLIMBER_UP = 2;
     public static final int CLIMBER_DOWN = 1;
 
-    public static final double CLIMBER_SPEED = 0.6;
+    public static final double CLIMBER_SPEED = 0.4;
 
   }
 
