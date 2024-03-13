@@ -16,6 +16,12 @@
           "data": {
             "pathName": "Blue1"
           }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Spinny"
+          }
         }
       ]
     }

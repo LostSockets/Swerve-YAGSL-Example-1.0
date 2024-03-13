@@ -210,6 +210,7 @@ public class RobotContainer
   {
     // An example command will be run in autonomous
     return drivebase.getAutonomousCommand("Blue1Auto");
+    //return drivebase.getAutonomousCommand("Blue1andSpinny");
     //return new PathPlannerAuto("example");
     //return autoChooser.getSelected();
   }
