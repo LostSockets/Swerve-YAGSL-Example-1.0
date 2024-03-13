@@ -48,6 +48,11 @@ public final class Constants
 
   }
 
+  public static final class DriverConstants
+  {
+    public static final int LOCK = 1;
+  }
+
   public static class OperatorConstants
   {
 
