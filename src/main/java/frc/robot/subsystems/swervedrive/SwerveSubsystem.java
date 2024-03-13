@@ -29,8 +29,8 @@ import frc.robot.Constants.DrivebaseConstants;
 
 import java.io.File;
 import java.util.function.DoubleSupplier;
-import org.photonvision.PhotonCamera;
-import org.photonvision.targeting.PhotonPipelineResult;
+//import org.photonvision.PhotonCamera;
+//import org.photonvision.targeting.PhotonPipelineResult;
 import swervelib.SwerveController;
 import swervelib.SwerveDrive;
 import swervelib.SwerveDriveTest;
@@ -54,12 +54,12 @@ public class SwerveSubsystem extends SubsystemBase
   /**
    * Maximum speed of the robot in meters per second, used to limit acceleration.
    */
-  public        double      maximumSpeed = Units.feetToMeters(DrivebaseConstants.MAX_SPEED);
+  public double maximumSpeed = Units.feetToMeters(DrivebaseConstants.MAX_SPEED);
   
   public void setMaximumSpeed(double maximumSpeed) {
       this.maximumSpeed = maximumSpeed;
   }
-
+  
   /**
    * Initialize {@link SwerveDrive} with the directory provided.
    *
@@ -104,7 +104,7 @@ public class SwerveSubsystem extends SubsystemBase
 
   /**
    * Setup AutoBuilder for PathPlanner.
-   */
+   */ 
   
   public void setupPathPlanner()
   {
@@ -147,6 +147,7 @@ public class SwerveSubsystem extends SubsystemBase
    * @return A {@link Command} which will run the alignment.
    */
   
+  /*
   public Command aimAtTarget(PhotonCamera camera)
   {
     return run(() -> {
@@ -159,7 +160,7 @@ public class SwerveSubsystem extends SubsystemBase
                                                            .getYaw()))); // Not sure if this will work, more math may be required.
       }
     });
-  }
+  } */
 
   /**
    * Get the path follower with events.

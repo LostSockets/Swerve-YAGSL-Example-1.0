@@ -73,6 +73,10 @@ public final class Constants
     public static final int CLIMBER_AXIS = 5;
     public static final int INDEXER_FORWARD = 5;
     public static final int INDEXER_REVERSE = 6;
+    public static final int CLIMBER_UP = 2;
+    public static final int CLIMBER_DOWN = 1;
+
+    public static final double CLIMBER_SPEED = 0.6;
 
   }
 

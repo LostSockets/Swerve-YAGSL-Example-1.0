@@ -5,38 +5,51 @@
 package frc.robot;
 
 import edu.wpi.first.math.MathUtil;
+//import edu.wpi.first.math.proto.Trajectory;
+//import edu.wpi.first.math.trajectory.TrajectoryUtil;
+//import edu.wpi.first.wpilibj.DriverStation;
 //import edu.wpi.first.math.geometry.Pose2d;
 //import edu.wpi.first.math.geometry.Rotation2d;
 //import edu.wpi.first.math.geometry.Translation2d;
 import edu.wpi.first.wpilibj.Filesystem;
 import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
+//import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+//import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+//import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.Commands;
 //import edu.wpi.first.wpilibj2.command.Commands;
 //import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.WaitCommand;
+//import edu.wpi.first.wpilibj2.command.Commands;
+//import edu.wpi.first.wpilibj2.command.InstantCommand;
+//import edu.wpi.first.wpilibj2.command.WaitCommand;
 //import edu.wpi.first.wpilibj2.command.button.CommandJoystick;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.DrivebaseConstants;
 import frc.robot.Constants.OperatorConstants;
-import frc.robot.Constants.OperatorPIDConstants;
-//import frc.robot.commands.operator.ClimberCmd;
+//import frc.robot.Constants.OperatorPIDConstants;
+import frc.robot.commands.operator.ClimberCmd;
 //import frc.robot.commands.operator.ElevatorCmd;
-import frc.robot.commands.operator.ElevatorPIDCmd;
-import frc.robot.commands.operator.IndexerCmd;
-import frc.robot.commands.operator.IntakeCmd;
-import frc.robot.commands.operator.ShooterCmd;
-//import frc.robot.subsystems.operator.ClimberSubsystem;
-import frc.robot.subsystems.operator.ElevatorSubsystem;
-import frc.robot.subsystems.operator.IndexerSubsystem;
-import frc.robot.subsystems.operator.IntakeSubsystem;
-import frc.robot.subsystems.operator.ShooterSubsystem;
+//import frc.robot.commands.operator.ElevatorPIDCmd;
+//import frc.robot.commands.operator.IndexerCmd;
+//import frc.robot.commands.operator.IntakeCmd;
+//import frc.robot.commands.operator.ShooterCmd;
+import frc.robot.subsystems.operator.ClimberSubsystem;
+//import frc.robot.subsystems.operator.ElevatorSubsystem;
+//import frc.robot.subsystems.operator.IndexerSubsystem;
+//import frc.robot.subsystems.operator.IntakeSubsystem;
+//import frc.robot.subsystems.operator.ShooterSubsystem;
 //import frc.robot.commands.swervedrive.drivebase.AbsoluteDriveAdv;
 import frc.robot.subsystems.swervedrive.SwerveSubsystem;
 import java.io.File;
+//import java.io.IOException;
+//import java.nio.file.Path;
+
+//import com.pathplanner.lib.auto.AutoBuilder;
+//import com.pathplanner.lib.auto.NamedCommands;
+//import com.pathplanner.lib.commands.PathPlannerAuto;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -50,20 +63,33 @@ public class RobotContainer
   private final SwerveSubsystem drivebase = new SwerveSubsystem(new File(Filesystem.getDeployDirectory(),
                                                                          "swerve/neo"));
 
-  private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-  private final IndexerSubsystem indexerSubsystem = new IndexerSubsystem();
-  private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
-  //private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
-  private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
+  //private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
+  //private final IndexerSubsystem indexerSubsystem = new IndexerSubsystem();
+  //private final ShooterSubsystem shooterSubsystem = new ShooterSubsystem();
+  private final ClimberSubsystem climberSubsystem = new ClimberSubsystem();
+  //private final ElevatorSubsystem elevatorSubsystem = new ElevatorSubsystem();
   private final XboxController operatorXbox = new XboxController(OperatorConstants.JOYSTICK_OPERATOR);
   private final XboxController driverXbox = new XboxController(DrivebaseConstants.JOYSTICK_DRIVER);
   /** 
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
+
+  //SendableChooser<Command> autoChooser;
+
   public RobotContainer()
   {
     // Configure the trigger bindings
     configureBindings();
+
+    
+    //autoChooser = AutoBuilder.buildAutoChooser();
+
+
+    /*chooser.addOption("Blue Auto 1", getAutonomousCommand());
+    chooser.addOption("Blue Auto 3", getAutonomousCommand());
+    chooser.addOption("Spinny", getAutonomousCommand());
+
+    Shuffleboard.getTab("Autonomous").add(chooser); */
 
     // COMMENTED BELOW OUT!!!
     /*AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
@@ -122,7 +148,24 @@ public class RobotContainer
 
     drivebase.setDefaultCommand(
         !RobotBase.isSimulation() ? driveFieldOrientedDirectAngle : driveFieldOrientedDirectAngleSim);
-  }
+
+    //SmartDashboard.putData("Auto Chooser", autoChooser);
+
+    }
+
+  /*
+    public Command loadPathPlannerTrajectoryCommand(string filename, boolean resetOdometry){
+      Trajectory trajectory;
+      try {
+        Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(filename);
+        trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+      }catch(IOException exception){
+        DriverStation.reportError("Unable to open trajectory" + filename, exception.getStackTrace());
+        System.out.println("Unable to read from file " + filename);
+        return new InstantCommand();
+    }
+
+  }*/
 
   /**
    * Use this method to define your trigger->command mappings. Triggers can be created via the
@@ -145,16 +188,16 @@ public class RobotContainer
 //    new JoystickButton(driverXbox, 3).whileTrue(new RepeatCommand(new InstantCommand(drivebase::lock, drivebase)));
 
     //intakeSubsystem.setDefaultCommand(new IntakeCmd(intakeSubsystem, () -> -operatorXbox.getRawAxis(Constants.OperatorConstants.INTAKE_AXIS)));
-    new JoystickButton(operatorXbox, OperatorConstants.INTAKE_IN).onTrue(new IntakeCmd(intakeSubsystem, 1)); //intake
-    new JoystickButton(operatorXbox, OperatorConstants.INTAKE_OUT).onTrue(new IntakeCmd(intakeSubsystem, -1)); // reverse intake
+    //new JoystickButton(operatorXbox, OperatorConstants.INTAKE_IN).onTrue(new IntakeCmd(intakeSubsystem, 1)); //intake
+    //new JoystickButton(operatorXbox, OperatorConstants.INTAKE_OUT).onTrue(new IntakeCmd(intakeSubsystem, -1)); // reverse intake
     //new JoystickButton(operatorXbox, OperatorConstants.SHOOTER).whileTrue(new ShooterCmd(shooterSubsystem, 1)); //intake
-    new JoystickButton(operatorXbox, OperatorConstants.SHOOTER).whileTrue(Commands.parallel(new IndexerCmd(indexerSubsystem, 1), (new WaitCommand(1.0).andThen(new ShooterCmd(shooterSubsystem, 1))))); //intake
-    //new JoystickButton(operatorXbox, OperatorConstants.CLIMBER_UP).onTrue(new ClimberCmd(climberSubsystem, 1)); //intake
-    //new JoystickButton(operatorXbox, OperatorConstants.CLIMBER_DOWN).onTrue(new ClimberCmd(climberSubsystem, -1)); // reverse intake
-    new JoystickButton(operatorXbox, OperatorConstants.INDEXER_FORWARD).onTrue(new IndexerCmd(indexerSubsystem, 1)); //intake
-    new JoystickButton(operatorXbox, OperatorConstants.INDEXER_REVERSE).onTrue(new IndexerCmd(indexerSubsystem, -1)); // reverse intake
-    new JoystickButton(operatorXbox, OperatorConstants.ELEVATOR_HIGH).onTrue(new ElevatorPIDCmd(elevatorSubsystem, OperatorPIDConstants.ELEVATOR_MAX_HEIGHT));
-    new JoystickButton(operatorXbox, OperatorConstants.ELEVATOR_LOW).onTrue(new ElevatorPIDCmd(elevatorSubsystem, OperatorPIDConstants.ELEVATOR_MIN_HEIGHT));
+    //new JoystickButton(operatorXbox, OperatorConstants.SHOOTER).whileTrue(Commands.parallel(new IndexerCmd(indexerSubsystem, 1), (new WaitCommand(1.0).andThen(new ShooterCmd(shooterSubsystem, 1))))); //intake
+    new JoystickButton(operatorXbox, OperatorConstants.CLIMBER_UP).whileTrue(new ClimberCmd(climberSubsystem, -OperatorConstants.CLIMBER_SPEED)); // climber up
+    new JoystickButton(operatorXbox, OperatorConstants.CLIMBER_DOWN).whileTrue(new ClimberCmd(climberSubsystem, OperatorConstants.CLIMBER_SPEED)); // climber down
+    //new JoystickButton(operatorXbox, OperatorConstants.INDEXER_FORWARD).onTrue(new IndexerCmd(indexerSubsystem, 1)); //intake
+    //new JoystickButton(operatorXbox, OperatorConstants.INDEXER_REVERSE).onTrue(new IndexerCmd(indexerSubsystem, -1)); // reverse intake
+    //new JoystickButton(operatorXbox, OperatorConstants.ELEVATOR_HIGH).onTrue(new ElevatorPIDCmd(elevatorSubsystem, OperatorPIDConstants.ELEVATOR_MAX_HEIGHT));
+    //new JoystickButton(operatorXbox, OperatorConstants.ELEVATOR_LOW).onTrue(new ElevatorPIDCmd(elevatorSubsystem, OperatorPIDConstants.ELEVATOR_MIN_HEIGHT));
   }
 
   /**
@@ -163,10 +206,12 @@ public class RobotContainer
    * @return the command to run in autonomous
    */
   // START OF GETAUTONOMOUSCOMMAND
-   public Command getAutonomousCommand()
+  public Command getAutonomousCommand()
   {
     // An example command will be run in autonomous
-    return drivebase.getAutonomousCommand("New Auto");
+    return drivebase.getAutonomousCommand("Blue1Auto");
+    //return new PathPlannerAuto("example");
+    //return autoChooser.getSelected();
   }
 
   public void setDriveMode()

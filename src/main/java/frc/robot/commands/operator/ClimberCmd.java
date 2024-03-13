@@ -22,7 +22,7 @@ public class ClimberCmd extends Command{
     @Override
     public void execute() {
       climberSubsystem.setMotor(speed);
-      //System.out.println("speed" + speed);
+      System.out.println("speed" + speed);
     }
   
     // Called once the command ends or is interrupted.

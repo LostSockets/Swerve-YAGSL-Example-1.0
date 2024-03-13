@@ -11,7 +11,7 @@ import frc.robot.Constants;
 
 public class ShooterSubsystem extends SubsystemBase{
 
-    private final CANSparkMax shooterMotor = new CANSparkMax(Constants.OperatorConstants.SHOOTER_MOTOR_PORT, MotorType.kBrushless);
+    private final CANSparkMax shooterMotor = new CANSparkMax(Constants.OperatorConstants.SHOOTER_MOTOR_PORT, MotorType.kBrushed);
     
     public ShooterSubsystem(){
 
