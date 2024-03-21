@@ -46,6 +46,8 @@ public final class Constants
     public static final double WHEEL_BASE_LENGTH = 27.5; // in inches
     public static final double WHEEL_BASE_WIDTH = 20.25; // in inches
 
+    public static final int ALLIANCE = 1; // BLUE = 1, RED = -1
+
   }
 
   public static final class DriverConstants
