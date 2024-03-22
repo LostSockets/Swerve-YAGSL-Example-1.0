@@ -153,7 +153,7 @@ public class RobotContainer
     drivebase.setDefaultCommand(
         !RobotBase.isSimulation() ? driveFieldOrientedDirectAngle : driveFieldOrientedDirectAngleSim);
 
-    autoChooser = AutoBuilder.buildAutoChooser("Blue1Auto");
+    autoChooser = AutoBuilder.buildAutoChooser("BARRIE2");
     SmartDashboard.putData("Auto Mode", autoChooser);
     }
 
