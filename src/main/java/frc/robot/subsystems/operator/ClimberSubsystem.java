@@ -25,7 +25,7 @@ public class ClimberSubsystem extends SubsystemBase{
     public void setMotor(double speed) {
         //SmartDashboard.putNumber("pivot speed", speed);
         climberMotor1.set(speed);
-        climberMotor2.set(-speed);
+        climberMotor2.set(speed);
 
     }
    
