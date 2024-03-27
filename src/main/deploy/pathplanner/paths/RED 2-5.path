@@ -3,25 +3,41 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.491837785573555,
-        "y": 6.9141167938326396
+        "x": 1.4272382085840662,
+        "y": 5.505809991789955
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.561381062293449,
-        "y": 6.884013205770527
+        "x": 6.206304537254968,
+        "y": 5.622088977889003
+      },
+      "isLocked": false,
+      "linkedName": "RED 2"
+    },
+    {
+      "anchor": {
+        "x": 6.433048560148113,
+        "y": 6.709297497915109
+      },
+      "prevControl": {
+        "x": 4.276073368010759,
+        "y": 7.058134456212255
+      },
+      "nextControl": {
+        "x": 8.014692589303454,
+        "y": 6.453506010720176
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.8752978027901492,
-        "y": 6.9141167938326396
+        "x": 7.729559255152505,
+        "y": 0.7558134096438167
       },
       "prevControl": {
-        "x": 3.569007320185314,
-        "y": 6.884013205770527
+        "x": 7.572582623918788,
+        "y": 1.9534869664640182
       },
       "nextControl": null,
       "isLocked": false,
@@ -43,7 +59,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "BARRIE",
+  "folder": "RED 2",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0

@@ -3,7 +3,10 @@
   "robotLength": 0.9,
   "holonomicMode": true,
   "pathFolders": [
-    "New Folder"
+    "BARRIE",
+    "RED 3",
+    "RED 1",
+    "RED 2"
   ],
   "autoFolders": [
     "Simple"

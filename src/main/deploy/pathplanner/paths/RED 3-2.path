@@ -3,29 +3,45 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.491837785573555,
-        "y": 6.9141167938326396
+        "x": 1.4272382085840662,
+        "y": 2.174417040052209
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.561381062293449,
-        "y": 6.884013205770527
+        "x": 2.4272382085840665,
+        "y": 2.1744170400522087
+      },
+      "isLocked": false,
+      "linkedName": "RED 3"
+    },
+    {
+      "anchor": {
+        "x": 6.467932255977827,
+        "y": 1.3546501880539168
+      },
+      "prevControl": {
+        "x": 5.386538045030765,
+        "y": 0.4636624570699559
+      },
+      "nextControl": {
+        "x": 7.54932646692489,
+        "y": 2.245637919037878
       },
       "isLocked": false,
       "linkedName": null
     },
     {
       "anchor": {
-        "x": 2.8752978027901492,
-        "y": 6.9141167938326396
+        "x": 7.752815052372316,
+        "y": 5.738367963988052
       },
       "prevControl": {
-        "x": 3.569007320185314,
-        "y": 6.884013205770527
+        "x": 7.758629001677268,
+        "y": 4.587206001607471
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "END 2"
     }
   ],
   "rotationTargets": [],
@@ -43,7 +59,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "BARRIE",
+  "folder": "RED 3",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0
