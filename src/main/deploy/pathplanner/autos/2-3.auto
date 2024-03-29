@@ -1,6 +1,12 @@
 {
   "version": 1.0,
-  "startingPose": null,
+  "startingPose": {
+    "position": {
+      "x": 15.1,
+      "y": 5.58
+    },
+    "rotation": 0
+  },
   "command": {
     "type": "sequential",
     "data": {
@@ -8,12 +14,12 @@
         {
           "type": "path",
           "data": {
-            "pathName": "RED 1-1"
+            "pathName": "2-3"
           }
         }
       ]
     }
   },
-  "folder": null,
+  "folder": "2",
   "choreoAuto": false
 }

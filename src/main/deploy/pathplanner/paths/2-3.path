@@ -4,28 +4,44 @@
     {
       "anchor": {
         "x": 15.1,
-        "y": 2.174417040052209
+        "y": 5.505809991789955
       },
       "prevControl": null,
       "nextControl": {
-        "x": 16.1,
-        "y": 2.1744170400522087
+        "x": 11.273161356521015,
+        "y": 5.581391332754337
       },
       "isLocked": false,
-      "linkedName": "RED 3"
+      "linkedName": "RED 2"
     },
     {
       "anchor": {
-        "x": 8.7935119779588,
-        "y": 0.7383715617289585
+        "x": 10.526068870834626,
+        "y": 6.546506917376441
       },
       "prevControl": {
-        "x": 7.793511977958801,
-        "y": 0.7383715617289585
+        "x": 11.605273892516372,
+        "y": 6.933087820665426
+      },
+      "nextControl": {
+        "x": 9.16269775882328,
+        "y": 6.0581351757604365
+      },
+      "isLocked": false,
+      "linkedName": null
+    },
+    {
+      "anchor": {
+        "x": 8.8,
+        "y": 3.999997121807274
+      },
+      "prevControl": {
+        "x": 9.215023302567852,
+        "y": 4.982554554344236
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "END 5"
+      "linkedName": "END 3"
     }
   ],
   "rotationTargets": [],
@@ -43,7 +59,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "3",
+  "folder": "2",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0
