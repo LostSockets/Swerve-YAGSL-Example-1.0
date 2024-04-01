@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 4.491837785573555,
-        "y": 6.9141167938326396
+        "x": 15.096729600344258,
+        "y": 6.6219710138066725
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.561381062293449,
-        "y": 6.884013205770527
+        "x": 8.893245691960011,
+        "y": 6.720808151990863
       },
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "START 1"
     },
     {
       "anchor": {
-        "x": 2.8752978027901492,
-        "y": 6.9141167938326396
+        "x": 8.83130264844099,
+        "y": 2.395347113640403
       },
       "prevControl": {
-        "x": 3.569007320185314,
-        "y": 6.884013205770527
+        "x": 9.058046671334134,
+        "y": 7.3139482256301624
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": null
+      "linkedName": "END 4"
     }
   ],
   "rotationTargets": [],
@@ -43,7 +43,7 @@
     "rotateFast": false
   },
   "reversed": false,
-  "folder": "BARRIE",
+  "folder": "1",
   "previewStartingState": {
     "rotation": 0,
     "velocity": 0

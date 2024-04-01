@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 15.1,
-      "y": 5.58
+      "x": 1.3756161320151827,
+      "y": 6.953069564502119
     },
     "rotation": 0
   },
@@ -14,12 +14,12 @@
         {
           "type": "path",
           "data": {
-            "pathName": "2-2"
+            "pathName": "RED 1-1"
           }
         }
       ]
     }
   },
-  "folder": "2",
+  "folder": "1",
   "choreoAuto": false
 }

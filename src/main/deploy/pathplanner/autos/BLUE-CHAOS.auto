@@ -2,8 +2,8 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 15.1,
-      "y": 5.58
+      "x": 15.096729600344258,
+      "y": 6.6219710138066725
     },
     "rotation": 0
   },
@@ -14,12 +14,12 @@
         {
           "type": "path",
           "data": {
-            "pathName": "2-4"
+            "pathName": "BLUE-CHAOS"
           }
         }
       ]
     }
   },
-  "folder": "2",
+  "folder": null,
   "choreoAuto": false
 }

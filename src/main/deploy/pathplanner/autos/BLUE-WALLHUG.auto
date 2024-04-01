@@ -3,7 +3,7 @@
   "startingPose": {
     "position": {
       "x": 15.1,
-      "y": 2.2
+      "y": 7.0
     },
     "rotation": 0
   },
@@ -14,12 +14,12 @@
         {
           "type": "path",
           "data": {
-            "pathName": "3-5"
+            "pathName": "BLUE-WALLHUG"
           }
         }
       ]
     }
   },
-  "folder": "3",
+  "folder": null,
   "choreoAuto": false
 }

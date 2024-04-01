@@ -2,7 +2,7 @@
   "version": 1.0,
   "startingPose": {
     "position": {
-      "x": 15.1,
+      "x": 1.4,
       "y": 7.0
     },
     "rotation": 0
@@ -14,12 +14,12 @@
         {
           "type": "path",
           "data": {
-            "pathName": "1-5"
+            "pathName": "RED-WALLHUG"
           }
         }
       ]
     }
   },
-  "folder": "1",
+  "folder": null,
   "choreoAuto": false
 }
