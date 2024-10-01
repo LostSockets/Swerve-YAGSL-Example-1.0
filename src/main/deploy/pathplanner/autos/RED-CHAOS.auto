@@ -16,6 +16,18 @@
           "data": {
             "pathName": "RED-CHAOS"
           }
+        },
+        {
+          "type": "wait",
+          "data": {
+            "waitTime": 0.01
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "RED ACROSS MIDDLE"
+          }
         }
       ]
     }

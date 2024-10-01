@@ -41,7 +41,7 @@ public final class Constants
     public static final double DRIVE_THROTTLE = 0.8;
     public static final double DRIVE_TURBO = 1.0;
     public static final int ARCADE_DRIVE_TURBO = 6;
-    public static final double MAX_SPEED = 14.5;  // default 14.5
+    public static final double MAX_SPEED = 20;  // default 14.5
 
     public static final double WHEEL_BASE_LENGTH = 27.5; // in inches
     public static final double WHEEL_BASE_WIDTH = 20.25; // in inches

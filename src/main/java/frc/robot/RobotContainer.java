@@ -31,7 +31,7 @@ import frc.robot.Constants.DriverConstants;
 import frc.robot.Constants.OperatorConstants;
 //import frc.robot.Constants.OperatorPIDConstants;
 import frc.robot.commands.operator.ClimberCmd;
-import frc.robot.commands.swervedrive.drivebase.AbsoluteFieldDrive;
+//import frc.robot.commands.swervedrive.drivebase.AbsoluteFieldDrive;
 //import frc.robot.commands.operator.ElevatorCmd;
 //import frc.robot.commands.operator.ElevatorPIDCmd;
 //import frc.robot.commands.operator.IndexerCmd;
@@ -51,8 +51,8 @@ import java.io.File;
 
 //IF USING CHOOSER
 import com.pathplanner.lib.auto.AutoBuilder;
-import com.pathplanner.lib.auto.NamedCommands;
-import com.pathplanner.lib.commands.PathPlannerAuto;
+//import com.pathplanner.lib.auto.NamedCommands;
+//import com.pathplanner.lib.commands.PathPlannerAuto;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a "declarative" paradigm, very
@@ -96,7 +96,7 @@ public class RobotContainer
     
 
     // COMMENTED BELOW OUT!!!
-    AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
+   /*  AbsoluteDriveAdv closedAbsoluteDriveAdv = new AbsoluteDriveAdv(drivebase,
                                                                    () -> MathUtil.applyDeadband(driverXbox.getLeftY(),
                                                                                                 OperatorConstants.LEFT_Y_DEADBAND),
                                                                    () -> MathUtil.applyDeadband(driverXbox.getLeftX(),
@@ -107,7 +107,7 @@ public class RobotContainer
                                                                    driverXbox::getAButtonPressed,
                                                                    driverXbox::getXButtonPressed,
                                                                    driverXbox::getBButtonPressed);
-    
+    */
     // Applies deadbands and inverts controls because joysticks
     // are back-right positive while robot
     // controls are front-left positive
@@ -139,11 +139,11 @@ public class RobotContainer
     //test = MathUtil.applyDeadband((driverXbox.getLeftY()), OperatorConstants.LEFT_Y_DEADBAND);
 
     // COMMENTED BELOW OUT!!!!
-    Command driveFieldOrientedAnglularVelocity = drivebase.driveCommand(
+   /*  Command driveFieldOrientedAnglularVelocity = drivebase.driveCommand(
         () -> MathUtil.applyDeadband(driverXbox.getLeftY() * DrivebaseConstants.ALLIANCE, OperatorConstants.LEFT_Y_DEADBAND),
         () -> MathUtil.applyDeadband(driverXbox.getLeftX() * DrivebaseConstants.ALLIANCE, OperatorConstants.LEFT_X_DEADBAND),
         () -> driverXbox.getRawAxis(2));
-    
+    */
 
     Command driveFieldOrientedDirectAngleSim = drivebase.simDriveCommand(
         () -> MathUtil.applyDeadband(driverXbox.getLeftY() * DrivebaseConstants.ALLIANCE, OperatorConstants.LEFT_Y_DEADBAND),
